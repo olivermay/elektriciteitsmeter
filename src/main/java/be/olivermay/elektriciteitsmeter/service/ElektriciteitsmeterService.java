@@ -92,7 +92,7 @@ public class ElektriciteitsmeterService {
 			public void run() {
 				try {
 					I2CDevice device = I2CFactory.getInstance(I2CBus.BUS_1).getDevice(Integer.parseInt("48", 16));
-					device.read(address);
+					device.read(0);
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
