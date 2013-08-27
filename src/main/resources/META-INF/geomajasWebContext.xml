@@ -1,0 +1,63 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!-- we use the default BeanNameUrlHandlerMapping for mapping to controllers -->
+	<bean id="defaultHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<!-- need security  -->
+		<property name="interceptors">
+			<list>
+				<ref bean="securityInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="securityInterceptor" class="org.geomajas.servlet.mvc.SecurityInterceptor"></bean>
+
+	<!--  we need a view resolver -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"></bean>
+
+	<context:component-scan base-package="be.olivermay.elektriciteitsmeter.mvc" />
+
+	<!-- we use the default BeanNameUrlHandlerMapping for mapping to controllers -->
+	<!-- <bean id="defaultHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" 
+		/> -->
+
+	<!-- we need a view resolver -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"></bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- Hibernate SessionFactory -->
+<!-- 	<bean id="sessionFactory" -->
+<!-- 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!-- 		<property name="configLocation"> -->
+<!-- 			<value>classpath:/hibernate.cfg.xml</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="configurationClass"> -->
+<!-- 			<value>org.hibernate.cfg.AnnotationConfiguration</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="packagesToScan"> -->
+<!-- 			<list> -->
+<!-- 				<value>be.olivermay.elektriciteitsmeter.domain</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!-- Datasource -->
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
+<!-- 		<property name="driverClassName" value="org.postgresql.Driver" /> -->
+<!-- 		<property name="url" -->
+<!-- 			value="jdbc:postgresql://localhost:5432/elektriciteitsmeter" /> -->
+<!-- 		<property name="username" value="elektriciteitsmeter" /> -->
+<!-- 		<property name="password" value="elektriciteitsmeter" /> -->
+<!-- 	</bean> -->
+	
+
+</beans>

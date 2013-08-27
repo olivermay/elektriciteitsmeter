@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<module rename-to="elektriciteitsmeter">
+
+	<inherits name='com.google.gwt.user.User'/>
+<!-- 	<inherits name="com.google.gwt.user.theme.standard.Standard" /> -->
+<!--   <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  <inherits name="com.google.gwt.user.theme.clean.Clean"/>
+<!--   <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+<!--       <inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/> -->
+
+	<!-- Geomajas Client -->
+    <inherits name="org.geomajas.puregwt.GeomajasClientImpl" />
+    <inherits name="org.geomajas.puregwt.theme.GeomajasDefaultTheme" />
+    
+    <inherits name='com.google.gwt.visualization.Visualization'/>
+
+  	
+    <entry-point class="be.olivermay.elektriciteitsmeter.client.ElektriciteitsmeterEntrypoint"/>
+
+	<source path='client'/>
+</module>
