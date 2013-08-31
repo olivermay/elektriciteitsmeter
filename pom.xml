@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.olivermay</groupId>
 	<artifactId>elektriciteitsmeter</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<dependencyManagement>
 		<dependencies>
@@ -17,28 +17,10 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.geomajas</groupId>
-				<artifactId>geomajas-face-puregwt</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>com.google.gwt.google-apis</groupId>
-			<artifactId>gwt-visualization</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.geomajas</groupId>
-			<artifactId>geomajas-puregwt-client-impl</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -141,20 +123,20 @@
 			<version>0.0.5</version>
 		</dependency>
 
-<!-- 
-		<dependency>
-			<groupId>net.sf.jipcam</groupId>
-			<artifactId>jipcam-axis-core</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
- -->
- 
+		<!--
+				<dependency>
+					<groupId>net.sf.jipcam</groupId>
+					<artifactId>jipcam-axis-core</artifactId>
+					<version>1.0-SNAPSHOT</version>
+					<exclusions>
+						<exclusion>
+							<groupId>org.springframework</groupId>
+							<artifactId>spring</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+		 -->
+
 		<!-- Google dependencies -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -204,56 +186,38 @@
 						<contextPath>/</contextPath>
 						<baseResource implementation="org.mortbay.resource.ResourceCollection">
 							<!-- need both the webbapp dir and location where GWT puts stuff -->
-							<resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
+							<resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}
+							</resourcesAsCSV>
 						</baseResource>
 					</webAppConfig>
 					<reload>manual</reload>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.4.0</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.google.gwt</groupId>
-						<artifactId>gwt-user</artifactId>
-						<version>${gwt-version}</version>
-					</dependency>
-					<dependency>
-						<groupId>com.google.gwt</groupId>
-						<artifactId>gwt-dev</artifactId>
-						<version>${gwt-version}</version>
-					</dependency>
-				</dependencies>
+				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<module>be.olivermay.elektriciteitsmeter.Elektriciteitsmeter</module>
-					<runTarget>index.html</runTarget>
-					<disableCastChecking>true</disableCastChecking>
-					<disableClassMetadata>true</disableClassMetadata>
-					<extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>
-					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
-					<copyWebapp>true</copyWebapp>
+					<archive>
+						<manifest>
+							<mainClass>be.olivermay.elektriciteitsmeter.Elektriciteitsmeter</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 				<executions>
 					<execution>
-						<id>compile</id>
-						<phase>test-compile</phase>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
 						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
+							<goal>single</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
+
 
 	<properties>
 		<gwt-version>2.4.0</gwt-version>

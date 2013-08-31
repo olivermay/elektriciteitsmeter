@@ -10,12 +10,12 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<!-- need security  -->
 		<property name="interceptors">
 			<list>
-				<ref bean="securityInterceptor" />
+				<!--<ref bean="securityInterceptor" />-->
 			</list>
 		</property>
 	</bean>
 
-	<bean id="securityInterceptor" class="org.geomajas.servlet.mvc.SecurityInterceptor"></bean>
+	<!--<bean id="securityInterceptor" class="org.geomajas.servlet.mvc.SecurityInterceptor"></bean>-->
 
 	<!--  we need a view resolver -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"></bean>

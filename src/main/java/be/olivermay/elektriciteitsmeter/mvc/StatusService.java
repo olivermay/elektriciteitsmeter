@@ -14,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sun.xml.bind.v2.runtime.reflect.Lister;
-
 import be.olivermay.elektriciteitsmeter.domain.Meting;
 import be.olivermay.elektriciteitsmeter.service.DatabaseService;
 import be.olivermay.elektriciteitsmeter.service.ElektriciteitsmeterEvent;
