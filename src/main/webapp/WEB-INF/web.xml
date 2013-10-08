@@ -11,7 +11,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
 			<!--classpath:org/geomajas/spring/geomajasContext.xml-->
-			classpath:be/olivermay/elektriciteitsmeter/config/spring/applicationContext.xml
+			classpath:/WEB-INF/applicationContext.xml
         </param-value>
     </context-param>
     
@@ -47,7 +47,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-			classpath*:META-INF/geomajasWebContext.xml
+			classpath:/WEB-INF/webContext.xml
 			</param-value>
 			<description>Spring Web-MVC specific (additional) context files.</description>
 		</init-param>
