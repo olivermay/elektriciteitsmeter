@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class ElektriciteitsmeterStarter {
 
 	@Autowired
-	ElektriciteitsmeterService service;
+    ElektriciteitsmeterService service;
 	
 	@PostConstruct
 	public void start() {

@@ -15,6 +15,8 @@ import java.io.IOException;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -23,21 +25,42 @@ import com.pi4j.io.i2c.I2CFactory;
  */
 public class I2CSensorRunner implements Runnable {
 
-	private boolean stopRequested = false;
+    private PulseHandler handler;
+
+    private boolean stopRequested = false;
 	
-	private boolean pulse = false;
-	
+	private boolean state = false;
+    private boolean previousState = false;
+
+    private int lastValue;
+
+    private final Logger log = LoggerFactory.getLogger(I2CSensorRunner.class);
+
+    public I2CSensorRunner(PulseHandler handler) {
+        this.handler = handler;
+    }
+
 	@Override
 	public void run() {
 		I2CDevice device;
 		try {
 			device = I2CFactory.getInstance(I2CBus.BUS_1).getDevice(Integer.parseInt("48", 16));
-
 			while (!stopRequested) {
-				int value = device.read(0);
-				
-				System.out.println(value);
-				Thread.sleep(100);
+				int value = device.read();
+                if (value < 128) {
+                    state = false;
+                } else {
+                    state = true;
+                }
+
+                if (state != previousState) {
+                    if (state) {
+                        handler.handlePulse();
+                        log.debug("pulse");
+                    }
+                    previousState = state;
+                }
+				Thread.sleep(50);
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

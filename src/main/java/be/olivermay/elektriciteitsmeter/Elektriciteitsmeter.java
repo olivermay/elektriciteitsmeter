@@ -10,10 +10,9 @@
  */
 package be.olivermay.elektriciteitsmeter;
 
+import be.olivermay.elektriciteitsmeter.service.ElektriciteitsmeterServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import be.olivermay.elektriciteitsmeter.service.ElektriciteitsmeterService;
 
 /**
  * @author Oliver May
@@ -25,8 +24,8 @@ public class Elektriciteitsmeter {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"/be/olivermay/elektriciteitsmeter/config/spring/applicationContext.xml");
 
-		ElektriciteitsmeterService service = (ElektriciteitsmeterService) context
-				.getBean(ElektriciteitsmeterService.NAME);
+		ElektriciteitsmeterServiceImpl service = (ElektriciteitsmeterServiceImpl) context
+				.getBean(ElektriciteitsmeterServiceImpl.NAME);
 		
 	}
 
