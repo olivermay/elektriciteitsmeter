@@ -45,4 +45,18 @@ public class DatabaseService {
 				desc()).list();
 	}
 
+	public List getMetingenByHour(String intervalStart, String intervalEnd) {
+		List results = sessionFactory.getCurrentSession().createSQLQuery("SELECT sum(pulses), \n" +
+				"extract(hour from datum) uur,\n" +
+				"extract(doy from datum) dag\n" +
+				"\n" +
+				"FROM meting \n" +
+				"WHERE datum > now() - interval '" + intervalStart + "' AND datum < now() - interval '" + intervalEnd + "' \n" +
+				"GROUP BY uur, dag\n" +
+				"ORDER by uur, dag asc;").list();
+		return results;
+	}
+
+
+
 }
