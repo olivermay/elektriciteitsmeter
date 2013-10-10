@@ -77,7 +77,7 @@ public class ElektriciteitsmeterServiceImpl implements PulseHandler, Elektricite
             meting.setPulses(pulses);
             pulses = 0;
         }
-        dbService.saveOrUpdate(meting);
+//        dbService.saveOrUpdate(meting);
         log.info("saved record: " + meting.toString());
     }
 
